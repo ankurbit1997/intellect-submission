@@ -1,5 +1,3 @@
-import React from "react";
-
 function Cross() {
   return (
     <svg fill="none" viewBox="0 0 15 15" height="0.7em" width="0.7em">

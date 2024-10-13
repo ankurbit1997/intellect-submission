@@ -1,5 +1,3 @@
-import React from "react";
-
 function IconBxArrowBack() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" height="0.7em" width=".7em">

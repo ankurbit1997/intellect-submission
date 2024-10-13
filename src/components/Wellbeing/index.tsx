@@ -1,4 +1,3 @@
-import React from "react";
 import { IMoodCard } from "./interface";
 import { useCallback, useState } from "react";
 import { alright, bad, fantastic, prettygood, terrible } from "../../assets";
