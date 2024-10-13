@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { formatDate, groupSlotsByDate } from "../../helpers/utils";
-import Prev from "../svg/Prev";
+import Prev from "../../svg/Prev";
 import mockData from "./../../mock.json";
 import { motion } from "framer-motion";
 import { ISlot } from "./interface";
