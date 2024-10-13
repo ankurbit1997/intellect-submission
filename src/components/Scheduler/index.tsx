@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { formatDate, groupSlotsByDate } from "../../helpers/utils";
 import Prev from "../svg/Prev";
 import mockData from "./../../mock.json";
@@ -61,6 +61,17 @@ const index = () => {
     }
   }, []);
 
+  useEffect(() => {
+    // clear slots when date is changed
+    // assumption that slots of only a single date can be selected at once
+    setPickedTimeSlots([]);
+  }, [selectedDate]);
+
+  // handleSubmit can be added which takes the dates as arguement and pass it to BE
+  //   const handleSubmit = () => {
+  //     callToBE(pickedTimeSlots)
+  //   }
+
   return (
     <div className="bg-red-200 p-4 sm:p-8 w-full max-w-md mx-3 sm:md-2 relative ">
       <h5 className="font-medium">Pick a date</h5>
@@ -69,7 +80,7 @@ const index = () => {
           whileTap={{ scale: 0.9 }}
           onClick={moveLeft}
           role="button"
-          className="self-center bg-gray-200 rounded-full w-10 h-10 sm:w-14 sm:h-14 flex justify-center items-center shrink-0"
+          className="self-center bg-gray-200 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex justify-center items-center shrink-0"
         >
           <Prev />
         </motion.div>
@@ -105,7 +116,7 @@ const index = () => {
           whileTap={{ scale: 0.9 }}
           style={{ rotate: 180 }}
           onClick={moveRight}
-          className="self-center bg-gray-200 rounded-full w-10 h-10 sm:w-14 sm:h-14 flex justify-center items-center shrink-0"
+          className="self-center bg-gray-200 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex justify-center items-center shrink-0"
         >
           <Prev />
         </motion.div>
