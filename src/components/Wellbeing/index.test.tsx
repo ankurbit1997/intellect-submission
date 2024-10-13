@@ -5,7 +5,11 @@ import WellBeing from "./index";
 import "@testing-library/jest-dom/vitest";
 
 describe("WellBeing Component", () => {
-  const mockCloseModal = vi.fn(); // Mocking the closeModal function
+  let mockCloseModal: any;
+
+  beforeEach(() => {
+    mockCloseModal = vi.fn(); // Reset the mock before each test
+  });
 
   it("renders without crashing and displays initial text", () => {
     const { unmount } = render(<WellBeing closeModal={mockCloseModal} />); // Render the component
@@ -64,6 +68,22 @@ describe("WellBeing Component", () => {
     const backButton = screen.getByTestId("back-button");
     fireEvent.click(backButton);
     expect(mockCloseModal).toHaveBeenCalled(); // Ensure closeModal is called
+    unmount();
+  });
+
+  it("back button doesn't close the modal after continue is clicked", () => {
+    const { unmount } = render(<WellBeing closeModal={mockCloseModal} />);
+
+    const moodCard = screen.getByText(/fantastic/i); // Assuming "Fantastic" is one of the moods
+    fireEvent.click(moodCard); // Simulate selecting a mood
+
+    const continueButton = screen.getByTestId("continue-button");
+    fireEvent.click(continueButton); // Simulate clicking continue
+
+    const backButton = screen.getByTestId("back-button");
+    fireEvent.click(backButton); // Click the back button
+
+    expect(mockCloseModal).not.toHaveBeenCalled(); // Ensure closeModal is not called
     unmount();
   });
 });
