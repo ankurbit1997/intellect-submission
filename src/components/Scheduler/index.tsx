@@ -79,6 +79,7 @@ const index = () => {
         <motion.div
           whileTap={{ scale: 0.9 }}
           onClick={moveLeft}
+          data-testid={"left-button"}
           role="button"
           className="self-center bg-gray-200 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex justify-center items-center shrink-0"
         >
@@ -93,6 +94,7 @@ const index = () => {
               onClick={() => {
                 setSelectedDate(key);
               }}
+              data-testid={"date-button"}
               role="button"
               className={` rounded-md border-gray-300 border p-3 sm:p-5  ${
                 selectedDate === key
@@ -114,6 +116,7 @@ const index = () => {
         <motion.div
           role="button"
           whileTap={{ scale: 0.9 }}
+          data-testid={"right-button"}
           style={{ rotate: 180 }}
           onClick={moveRight}
           className="self-center bg-gray-200 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex justify-center items-center shrink-0"
@@ -137,6 +140,7 @@ const index = () => {
               return (
                 <div
                   role="button"
+                  data-testid={"slot-button"}
                   onClick={() => {
                     handleTimePicked(date);
                   }}
