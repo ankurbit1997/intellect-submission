@@ -1,0 +1,151 @@
+import { IMoodCard } from "./interface";
+import { useCallback, useState } from "react";
+import { alright, bad, fantastic, prettygood, terrible } from "../../assets";
+import IconBxArrowBack from "../svg/Back";
+import Cross from "../svg/Cross";
+import { motion } from "framer-motion";
+
+const moodData: IMoodCard[] = [
+  {
+    id: 1,
+    title: "Terrible",
+    img: terrible,
+  },
+  {
+    id: 2,
+    title: "Bad",
+    img: bad,
+  },
+  {
+    id: 3,
+    title: "Alright",
+    img: alright,
+  },
+  {
+    id: 4,
+    title: "Good",
+    img: prettygood,
+  },
+  {
+    id: 5,
+    title: "Fantastic",
+    img: fantastic,
+  },
+];
+
+const index = ({ closeModal }: { closeModal: () => void }) => {
+  const [selectedMood, setSelectedMood] = useState<IMoodCard | null>();
+
+  //mocking next step handle , in real application this wont look like this
+  const [continueClicked, setContinueClicked] = useState(false);
+
+  const handleContinueClicked = useCallback(() => {
+    setContinueClicked(true);
+  }, []);
+
+  const isDisabled = !selectedMood;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="bg-white rounded p-5 flex flex-col items-center w-full max-w-xl mx-3 sm:md-2 relative"
+    >
+      <h4 className="text-black sm:text-xl font-semibold">
+        Wellbeing Check-in
+      </h4>
+      <p className="text-gray-600 mt-24 sm:mt-32 text-xs font-semibold">
+        {continueClicked
+          ? "Thanks for the answer!"
+          : "Hello! How are you feeling today?"}
+      </p>
+      <div
+        onClick={() => {
+          if (continueClicked) {
+            setContinueClicked(false);
+            setSelectedMood(null);
+          } else {
+            closeModal();
+          }
+        }}
+        role="button"
+        className="absolute left-4 top-4"
+      >
+        <IconBxArrowBack />
+      </div>
+      <div
+        onClick={closeModal}
+        role="button"
+        className="absolute right-4 top-4"
+      >
+        <Cross />
+      </div>
+      {continueClicked && selectedMood ? (
+        <div className="flex mb-16 sm:mb-20 mt-8 gap-1 grow flex-wrap">
+          <MoodCard selectedMood={selectedMood} item={selectedMood} />
+        </div>
+      ) : (
+        <div className="flex mb-16 sm:mb-20 mt-8 gap-1 grow flex-wrap">
+          {moodData.map((item) => {
+            return (
+              <MoodCard
+                selectedMood={selectedMood}
+                setSelectedMood={setSelectedMood}
+                key={item?.id}
+                item={item}
+              />
+            );
+          })}
+        </div>
+      )}
+
+      <button
+        onClick={handleContinueClicked}
+        disabled={isDisabled}
+        className={` mt-4 text-xs  font-semibold px-2 py-2 w-auto self-stretch rounded-md ${
+          isDisabled ? "bg-teal-100 text-teal-600" : "bg-teal-600 text-teal-50"
+        }`}
+      >
+        {continueClicked ? "Thank you!" : "Continue"}
+      </button>
+    </motion.div>
+  );
+};
+
+export default index;
+
+const MoodCard = ({
+  item,
+  setSelectedMood,
+  selectedMood,
+}: {
+  item: IMoodCard;
+  setSelectedMood?: React.Dispatch<
+    React.SetStateAction<IMoodCard | null | undefined>
+  >;
+  selectedMood?: IMoodCard | null | undefined;
+}) => {
+  return (
+    <div
+      onClick={() => {
+        if (setSelectedMood) {
+          if (selectedMood?.id !== item?.id) {
+            setSelectedMood(item);
+          } else {
+            setSelectedMood(null);
+          }
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      className={`flex w-18 flex-grow flex-col items-center border-slate-500-200 rounded-lg border p-2 sm:p-3  transition-colors ${
+        selectedMood?.id === item?.id ? "bg-slate-300" : "hover:bg-slate-50"
+      }`}
+    >
+      <img src={item?.img} alt={item?.title} className="w-8" />
+      <p className="text-xxs mt-2 font-semibold">{item?.title}</p>
+    </div>
+  );
+};
