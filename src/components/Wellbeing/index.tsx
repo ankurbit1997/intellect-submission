@@ -1,3 +1,4 @@
+import React from "react";
 import { IMoodCard } from "./interface";
 import { useCallback, useState } from "react";
 import { alright, bad, fantastic, prettygood, terrible } from "../../assets";
@@ -34,7 +35,7 @@ export const moodData: IMoodCard[] = [
   },
 ];
 
-const index = ({ closeModal }: { closeModal: () => void }) => {
+const Index = ({ closeModal }: { closeModal: () => void }) => {
   const [selectedMood, setSelectedMood] = useState<IMoodCard | null>();
 
   //mocking next step handle , in real application this wont look like this
@@ -71,12 +72,14 @@ const index = ({ closeModal }: { closeModal: () => void }) => {
             closeModal();
           }
         }}
+        data-testid={"back-button"}
         role="button"
         className="absolute left-4 top-4"
       >
         <IconBxArrowBack />
       </div>
       <div
+        data-testid={"close-button"}
         onClick={closeModal}
         role="button"
         className="absolute right-4 top-4"
@@ -108,6 +111,7 @@ const index = ({ closeModal }: { closeModal: () => void }) => {
         className={` mt-4 text-xs  font-semibold px-2 py-2 w-auto self-stretch rounded-md ${
           isDisabled ? "bg-teal-100 text-teal-600" : "bg-teal-600 text-teal-50"
         }`}
+        data-testid={continueClicked ? "thankyou-button" : "continue-button"}
       >
         {continueClicked ? "Thank you!" : "Continue"}
       </button>
@@ -115,4 +119,4 @@ const index = ({ closeModal }: { closeModal: () => void }) => {
   );
 };
 
-export default index;
+export default Index;

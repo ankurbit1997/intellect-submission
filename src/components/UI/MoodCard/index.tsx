@@ -1,3 +1,4 @@
+import React from "react";
 import { IMoodCard } from "../../Wellbeing/interface";
 
 const MoodCard = ({
