@@ -18,10 +18,11 @@ to run the test cases
 
    #Assumptions
  
-   - The Component is there from the start
-   - User can select multiple time slots but for only one date at once.
-   - while user has selected slots and changes date selected time slots will be cleared
-   - Further additonal behaviour after selecting slots was not specified, but can be added as required
+   - The Widget pops up on clicking on Check-in Button
+   - When Initially if user click on back icon Widget closes
+   - Once user has selected any mood and clicked Continue the selected mood is shown
+   - At this point back button takes user to selection state
+   - Further additonal behaviour can be added as required
    - Smallest mobile size till which UI should fine is 340px however it wont break until 310px
    - Responsiveness is maintained by own understanding.
 
