@@ -14,7 +14,7 @@ to run the test cases
 4. yarn test
 ```
 
-1. WellBeing Widget
+1. WellBeing Widget 
 
    #Assumptions
  
@@ -28,6 +28,7 @@ to run the test cases
 
 
   #Features
+   - This is Present in home i.e / URL
    - user can click Check in Button to check in the daily mood 
    - user will be shown 5 moods on a scale with respective UI
    - hover effect to show the hovered card
@@ -53,6 +54,7 @@ to run the test cases
 
 
   #Features
+   - This submission is present in /2 URL endpoint. e.g localhost:3000/2
    - user can Change date and see available time slots
    - user can pick time slots for a date 
    - user can pick multiple slots for single day at once, not necessarily consecutive slots
